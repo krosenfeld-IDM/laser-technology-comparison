@@ -28,7 +28,7 @@ run_model_medium () {
         times+=(`expr $endt - $startt`)
     done
     readarray -t sorted < <(printf '%s\n' "${times[@]}" | sort)
-    echo -n "numpy-numba SIRSingleNode-small (ms): "
+    echo -n "numpy-numba SIRSingleNode-medium (ms): "
     echo "${sorted[(`expr $N_RUN / 2 + $N_RUN % 2`)]} * 0.000001" | bc
 }
 

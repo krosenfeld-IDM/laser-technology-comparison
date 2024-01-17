@@ -5,6 +5,9 @@
 echo "Benchmarking julia-ABM"
 julia --project=@. SIRSingleNode/julia-ABM/benchmark_sirsinglenode.jl
 
+echo "Benchmarking julia-vector"
+julia --project=@. SIRSingleNode/julia-vector/benchmark_sirsinglenode.jl
+
 echo "Benchmarking numpy-numba"
 bash SIRSingleNode/numpy-numba/benchmark_sirsinglenode.sh
 

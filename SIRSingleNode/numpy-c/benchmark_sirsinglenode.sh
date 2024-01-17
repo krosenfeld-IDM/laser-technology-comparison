@@ -9,6 +9,7 @@ run_model_small () {
     for i in $( seq 1 $N_RUN )
     do
         startt=`date +%s%N`
+        bash init.sh
         python tlc.py
         endt=`date +%s%N`
         times+=(`expr $endt - $startt`)
@@ -22,7 +23,6 @@ run_model_small () {
 pushd .
 # change the current working directory to the one with this file in it
 cd "$(dirname "$0")"
-bash init.sh
 run_model_small
 # and then revert back to the original working directory
 popd

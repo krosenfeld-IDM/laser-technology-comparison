@@ -1,6 +1,6 @@
 using PrettyTables
 
-frameworks = ["numpy-numba", "numpy-c", "sqlLite", "julia-ABM"]
+frameworks = ["numpy-numba", "numpy-c", "sqlLite", "julia-ABM", "julia-vector"]
 
 models = ["SIRSingleNode-small", "SIRSingleNode-medium"]
 
@@ -28,7 +28,7 @@ for m in models
     end
 end
 
-columns = ["Model/Framework", "numpy-numba", "numpy-c", "sqlLite", "julia-ABM"]
+columns = ["Model/Framework", "numpy-numba", "numpy-c", "sqlLite", "julia-ABM", "julia-vector"]
 results = mapreduce(permutedims, vcat, [vcat([m], [ifelse(frameworks_comparison[m][f] != 0, frameworks_comparison[m][f], ".") for f in frameworks]) for m in models])
 conf = set_pt_conf(tf = tf_markdown, alignment = :c)
 table = pretty_table_with_conf(conf, results; header = columns)
