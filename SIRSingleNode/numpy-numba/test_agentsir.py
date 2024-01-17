@@ -1,4 +1,6 @@
-import numpy as np
+#!/usr/bin/env python3
+
+"""Test cases for HomogeneousABC class."""
 
 from argparse import ArgumentParser
 from datetime import datetime
@@ -11,36 +13,11 @@ import numpy as np
 import polars as pl
 from tqdm import tqdm
 
-class HomogeneousABC:
-    """Homogeneous Agent Based Community"""
-    def __init__(self, count, **kwargs):
-        self.count = count
-        self.steps = []
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-        return
+# from idmlaser.community.homogeneous_abc import HomogeneousABC as abc
+from homogeneous_abc import HomogeneousABC as abc
 
-    # dynamically add a property to the class
-    def add_property(self, name, dtype=np.uint32, default=0):
-        """Add a property to the class"""
-        # initialize the property to a NumPy array with of size self.count, dtype, and default value
-        setattr(self, name, np.full(self.count, default, dtype=dtype))
-        return
-
-    # add a processing step to be called at each time step
-    def add_step(self, step):
-        """Add a processing step to be called at each time step"""
-        self.steps.append(step)
-        return
-
-    # run all processing steps at each time step
-    def step(self, timestep: np.uint32):
-        """Run all processing steps"""
-        for step in self.steps:
-            step(self, timestep)
-        return
-    
 timport = datetime.now()
+
 
 def set_params():
     TIMESTEPS = np.uint32(128)
@@ -82,7 +59,7 @@ def test_sir(params):
     ITIMER_TYPE_NB = nb.uint8
 
     print(f"Creating a well-mixed SIR community with {params.pop_size:_} individuals.")
-    community = HomogeneousABC(
+    community = abc(
         params.pop_size,
         beta=params.beta,  # add the beta property to the community for use later
         mean=params.inf_mean,  # add the mean property to the community
